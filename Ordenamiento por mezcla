@@ -1,0 +1,52 @@
+"""
+
+
+Ejercicio:
+Implementar el TDA y dar un ejemplo con un arreglo desordenado de 10 elementos, 
+imprima el TDA ordenado de forma ascendente utilizando el método ordenar por mezcla.
+
+"""
+# Función Ordenamiento por Mezcla:
+def mezcla_Ordenado(lista):
+ 
+   #Si es menor que 2, 1 o 0, se devuelve la lista. Ya que la lista ya esta ordenada. 
+ 
+   if len(lista) < 2:
+      return lista 
+    
+    # De no ser asi, se divide en 2:
+   else:
+        middle = len(lista) // 2 # longitud(lista)//2
+        izquierda = mezcla_Ordenado(lista[:middle]) # obtenemos el ordenado por la izquierda (tomando en cuenta el middle)
+        derecha = mezcla_Ordenado(lista[middle:]) # obtenemos el ordenado por la derecha (tomando en cuenta el middle)
+        return mezcla(derecha, izquierda)
+    
+# Función de mezcla
+def mezcla(l1, l2):
+    """
+    Esta funcion se encargara de intercalar los elementos de las dos
+    divisiones. En este caso la sublista en dos.
+    """
+    i, j = 0, 0 # Variables de incremento
+    result = [] # Lista de resultado
+ 
+   # Intercalar ordenadamente
+    while(i < len(l1) and j < len(l2)):
+        if (l1[i] < l2[j]):
+            result.append(l1[i])
+            i += 1
+        else:
+            result.append(l2[j])
+            j += 1
+ 
+   # Agregamos los resultados a la lista principal , es decir, las concatenamos a la lista principal.
+    result += l1[i:]
+    result += l2[j:]
+    return result
+
+
+if __name__ == '__main__':
+
+  l = [31,7,88,0,11,2,42,15,10,5]
+  lista_ordenada = mezcla_Ordenado(l)  
+  print(lista_ordenada) # se imprime la lista ordenada de forma ascendente
