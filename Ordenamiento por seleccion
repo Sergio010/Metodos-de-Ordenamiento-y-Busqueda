@@ -1,0 +1,59 @@
+
+
+def ord_seleccion(lista):
+    """ Ordena una lista de elementos según el método de selección.
+        Pre: los elementos de la lista deben ser comparables.
+        Post: la lista está ordenada. """
+
+    # n = posicion final del segmento a tratar, comienza en len(lista)-1*
+    n = len(lista)-1
+
+    # cicla mientras haya elementos para ordenar (2 o más elementos)
+    while n > 0:
+        # p es la posicion del mayor valor del segmento
+        p = buscar_max(lista, 0, n)
+
+        # intercambia el valor que está en p con el valor que
+        # está en la última posición del segmento
+        lista[p], lista[n] = lista[n], lista[p]
+
+        print ("DEBUG: ", p, n, lista) # imprime el intercambio de posiciones
+
+        # reduce el segmento en 1
+        n = n - 1
+
+def buscar_max(lista, ini, fin):
+    """ Devuelve la posición del máximo elemento en un segmento de
+        lista de elementos comparables.
+        Se trabaja sobre lista, que no debe ser vacía.
+        ini es la posición inicial del segmento, debe ser válida.
+        fin es la posición final del segmento, debe ser válida. """
+    pos_max = ini
+    for i in range(ini+1, fin+1):
+        if lista[i] > lista[pos_max]:
+            pos_max = i
+    return pos_max
+
+
+if __name__ == '__main__':
+ l=[3, 2, -1, 5, 0, 2]
+ ord_seleccion(l)
+ print(l)
+
+"""
+La función principal, ord_seleccion es la encargada de recorrer la lista, ubicando el mayor elemento al final del segmento y
+ luego reduciendo el segmento a analizar.
+
+Mientras que buscar_max es una función que ya se estudió previamente, que busca el mayor elemento de la lista y devuelve su posición.
+
+Como se puede ver en el código de la función buscar_max, para buscar el máximo ele-mento en un segmento de lista se debe recorrer todo ese segmento, 
+por lo que en nuestro caso debemos recorrer en el primer paso N elementos, en el segundo paso N —1 elementos, en el tercer paso N — 2 elementos, etc.
+ Cada visita a un elemento implica una cantidad constante y pequeña de comparaciones (que no depende de N). Por lo tanto tenemos que
+
+    T(N) = c * (2 + 3 + . . . + N ) = c * N * (N + 1)/2 = N^2
+
+O sea que ordenar por selección una lista de tamaño N insume tiempo del orden de N^2. Como ya se vio, este tiempo es independiente de si la lista estaba 
+previamente ordenda o no.
+
+En cuanto al espacio utilizado, sólo se tiene en memoria la lista que se desea ordenar y algunas variables de tamaño 1.
+"""
