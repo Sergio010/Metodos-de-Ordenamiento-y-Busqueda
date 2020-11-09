@@ -1,0 +1,14 @@
+def buscar(contenedor,numero):
+	for i in range(len(contenedor)):
+		if contenedor[i] == numero:
+			return i;
+	return -1
+
+
+if __name__ == '__main__':
+ contenedor = [2,3,7,11,22,28,34,37,41,48,49,50,52,54,60,66,69,71,72]
+ resultado = buscar(contenedor,28)
+ if resultado != -1:
+ 	print("El numero esta en la posicion: ",str(resultado))
+ else:
+ 	print("El numero no esta en el contenedor")
